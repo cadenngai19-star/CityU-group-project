@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>PawLink | Secure Pet Companion</title>
+<style>
+:root{--bg:#090f1d;--panel:#121b2c;--border:#26334c;--text:#edf2ff;--muted:#94a5bf;--accent:#a69cff;--green:#59dfb1;--amber:#ffc66d;--blue:#70caff;--pink:#f394cf}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#23204b,transparent 45%),radial-gradient(ellipse at 100% 25%,#102c3b,transparent 40%),var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}main{max-width:1400px;margin:auto;padding:32px}h1,h2,p{margin:0}h1{font-size:28px;letter-spacing:-1px}h2{font-size:17px}header,.heading,.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}header{margin-bottom:24px}.brand{display:flex;align-items:center;gap:14px}.mark{display:grid;place-items:center;background:linear-gradient(135deg,#a398ff,#5854d9);border-radius:16px;width:52px;height:52px;font-size:30px}.muted,.subtitle{color:var(--muted)}.subtitle{font-size:12px}.eyebrow{text-transform:uppercase;letter-spacing:1.7px;font-size:10px;font-weight:700;color:var(--muted)}.chip{border:1px solid var(--border);border-radius:30px;padding:6px 11px;font-size:10px}.live{color:var(--green)}select,button{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:11px 14px}select,button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible+.track{outline:3px solid var(--blue);outline-offset:4px}.notice{font-size:12px;padding:13px 16px;border:1px solid #8c83ff35;background:#8c83ff0d;border-radius:12px;margin-bottom:20px;color:#c8c4ff}.layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(310px,1fr);gap:20px}.stack{display:grid;gap:20px;align-content:start}.panel{padding:24px;background:linear-gradient(145deg,#172136ed,#111a2ced);border:1px solid var(--border);border-radius:20px;min-width:0;box-shadow:0 16px 50px #00000014}.heading{margin-bottom:20px}.metrics,.devices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric,.device{padding:17px;background:#0c1423;border:1px solid #23304a;border-radius:14px}.metric-label{font-size:12px;color:var(--muted);margin-bottom:8px}.value{font-size:28px;font-weight:650;letter-spacing:-1px}.unit{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:0}.intensity{border-color:#8c83ff60;background:#8c83ff0a}.intensity .value{color:var(--accent)}canvas{display:block;width:100%;height:116px;margin-top:12px}.chart-caption{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:22px}.formula{font:11px ui-monospace,monospace;color:var(--muted);margin-top:10px}.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--state-color,var(--green));color:var(--state-color,var(--green));background:#ffffff04;border-radius:14px;padding:12px 18px;font-size:27px;font-weight:750;letter-spacing:1px;margin-bottom:15px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor}.reason{font-size:13px;color:var(--muted);min-height:60px}.details{border-top:1px solid var(--border);margin-top:18px;padding-top:12px}.detail{display:flex;justify-content:space-between;gap:12px;font-size:11px;margin:9px 0}.detail span:first-child{color:var(--muted)}.detail span:last-child{text-align:right}.scenarios{display:flex;gap:5px;margin-top:20px}.step{flex:1;text-align:center;padding:8px 2px;background:#ffffff05;color:var(--muted);font-size:9px;border:1px solid transparent;border-radius:7px}.step.active{background:#8c83ff18;border-color:#8c83ff66;color:#c7c1ff}.helper{font-size:11px;color:var(--muted);margin-top:14px}.override-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;background:#0c1423;border:1px solid var(--border);border-radius:13px}.switch{display:inline-flex;position:relative;cursor:pointer;flex-shrink:0}.switch input{position:absolute;opacity:0;width:1px;height:1px}.track{width:48px;height:27px;background:#36435c;border-radius:30px;transition:.2s}.track:before{content:"";position:absolute;top:4px;left:4px;width:19px;height:19px;background:white;border-radius:50%;transition:.2s}input:checked+.track{background:#b07a32}input:checked+.track:before{transform:translateX(21px)}.buttons{display:grid;gap:10px;margin-top:16px}.buttons button{display:flex;justify-content:space-between;text-align:left;background:#8c83ff14;border-color:#7169c8;font-size:13px}.buttons button:hover:not(:disabled){background:#8c83ff2c}.buttons small{font-size:10px;color:var(--muted)}button:disabled{opacity:.38;cursor:not-allowed}.feedback{min-height:36px;font-size:12px;color:var(--amber);margin-top:14px}.device{text-align:center;padding:16px 9px}.device-icon{font-size:24px;margin-bottom:8px}.device-name{font-size:12px;font-weight:650}.device-value{color:var(--green);font-size:12px;margin-top:7px}.device-meta{font-size:10px;color:var(--muted);margin-top:4px}.logs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}.log-panel{padding:0;overflow:hidden}.log-header{display:flex;justify-content:space-between;gap:10px;padding:18px 20px;border-bottom:1px solid var(--border)}.log-header h2{font-size:13px}.terminal{height:270px;overflow-y:auto;padding:16px 18px;background:#080e19;font:11px/1.8 ui-monospace,Consolas,monospace;scrollbar-color:#34425e transparent}.log-line{overflow-wrap:anywhere;margin-bottom:6px}.log-time{color:#62728f}.log-info{color:#a7b6d2}.log-success{color:var(--green)}.log-warn{color:var(--amber)}.log-error{color:#ff8595}.log-crypto{color:#b4aaff}footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:22px;font-size:11px;color:var(--muted)}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.right-stack{grid-template-columns:1fr 1fr}}@media(max-width:700px){main{padding:18px}.right-stack,.logs{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.panel{padding:19px}.log-panel{padding:0}.value{font-size:25px}header>.row{width:100%}}@media(prefers-reduced-motion:reduce){*,*:before{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand"><div class="mark" aria-hidden="true">⌁</div><div><h1>PawLink<span style="color:var(--accent)">.</span></h1><p class="subtitle">AI-powered secure pet companion</p></div></div>
+    <div class="row"><span class="chip live">● LOCAL SIMULATION</span><label class="eyebrow" for="profile">Pet profile</label><select id="profile"><option value="dog">Atlas · Large Dog</option><option value="cat">Luna · Cat</option></select></div>
+  </header>
+  <div class="notice"><strong>Software-only research prototype.</strong> Synthetic sensors, heuristic behavior classification, and simulated appliances. Not a veterinary diagnostic, feeding recommendation, or production IoT security system.</div>
+  <div class="layout">
+    <div class="stack">
+      <section class="panel" aria-labelledby="telemetry-heading">
+        <div class="heading"><div><p class="eyebrow">Wearable stream</p><h2 id="telemetry-heading">Live biometric telemetry</h2></div><span class="chip live">● 2.5s sampling</span></div>
+        <div class="metrics">
+          <div class="metric"><p class="metric-label">Accelerometer · X</p><p class="value"><span id="axis-x">—</span> <span class="unit">m/s²</span></p></div>
+          <div class="metric"><p class="metric-label">Accelerometer · Y</p><p class="value"><span id="axis-y">—</span> <span class="unit">m/s²</span></p></div>
+          <div class="metric"><p class="metric-label">Accelerometer · Z</p><p class="value"><span id="axis-z">—</span> <span class="unit">m/s²</span></p></div>
+          <div class="metric intensity"><p class="metric-label">Vector intensity</p><p class="value"><span id="magnitude">—</span> <span class="unit">m/s²</span></p></div>
+          <div class="metric"><p class="metric-label">Heart rate</p><p class="value"><span id="heart-rate">—</span> <span class="unit">BPM</span></p></div>
+          <div class="metric"><p class="metric-label">Body temperature</p><p class="value"><span id="temperature">—</span> <span class="unit">°C</span></p></div>
+        </div>
+        <div class="chart-caption"><span>Motion intensity · recent samples</span><span id="sample-count">0 packets</span></div>
+        <canvas id="motion-chart" role="img" aria-label="Recent simulated motion intensity history"></canvas>
+        <p class="formula">|a| = √(X² + Y² + Z²) · simulated gravity-compensated acceleration</p>
+      </section>
+      <section class="panel" aria-labelledby="devices-heading">
+        <div class="heading"><div><p class="eyebrow">Connected habitat</p><h2 id="devices-heading">Virtual appliance network</h2></div><span class="chip">NO EXTERNAL TRAFFIC</span></div>
+        <div class="devices">
+          <div class="device"><div class="device-icon" aria-hidden="true">◒</div><div class="device-name">Smart feeder</div><div class="device-value" id="food-value">0 portions</div><div class="device-meta">10 g simulated portion</div></div>
+          <div class="device"><div class="device-icon" aria-hidden="true">◉</div><div class="device-name">Water station</div><div class="device-value" id="water-value">0 refills</div><div class="device-meta">50 mL simulated refill</div></div>
+          <div class="device"><div class="device-icon" aria-hidden="true">✧</div><div class="device-name">Laser toy</div><div class="device-value" id="toy-value">Standby</div><div class="device-meta">5-second virtual session</div></div>
+        </div>
+      </section>
+    </div>
+    <div class="stack right-stack">
+      <section class="panel" id="state-panel" aria-labelledby="ai-heading">
+        <div class="heading"><div><p class="eyebrow">Behavior intelligence</p><h2 id="ai-heading">Companion state</h2></div><span class="chip" id="control-mode">AI CONTROL</span></div>
+        <div aria-live="polite" aria-atomic="true"><div class="badge"><span class="dot"></span><span id="state-text">NORMAL</span></div><p class="reason" id="state-reason">Initializing the local telemetry engine…</p></div>
+        <div class="details">
+          <div class="detail"><span>Inference engine</span><span>Explainable rule-based mock</span></div>
+          <div class="detail"><span>Motion threshold</span><span id="motion-baseline">—</span></div>
+          <div class="detail"><span>Elevated / panic HR</span><span id="hr-baseline">—</span></div>
+          <div class="detail"><span>Thermal threshold</span><span id="temp-baseline">—</span></div>
+          <div class="detail"><span>Authentication</span><span id="crypto-mode">Initializing…</span></div>
+        </div>
+        <div class="scenarios" aria-label="Simulated scenario sequence"><span class="step" data-state="NORMAL">NORMAL</span><span class="step" data-state="HUNGRY">HUNGRY</span><span class="step" data-state="THIRSTY">THIRSTY</span><span class="step" data-state="BORED">BORED</span></div>
+        <p class="helper">Scenario changes every 10 seconds. Telemetry continues during human override; AI inference and automatic dispatch stop.</p>
+      </section>
+      <section class="panel" aria-labelledby="safety-heading">
+        <div class="heading"><div><p class="eyebrow">Human in the loop</p><h2 id="safety-heading">Safety & manual control</h2></div></div>
+        <div class="override-row"><div><strong id="override-label">Master Override</strong><p class="subtitle" id="override-description">AI active · manual commands locked</p></div><label class="switch"><input id="override" type="checkbox" role="switch" aria-labelledby="override-label" aria-describedby="override-description"><span class="track"></span></label></div>
+        <div class="buttons"><button data-action="food" disabled><span>Dispense Food</span><small>FEEDER →</small></button><button data-action="water" disabled><span>Refill Water</span><small>WATER →</small></button><button data-action="toy" disabled><span>Activate Laser Toy</span><small>PLAY →</small></button></div>
+        <p class="helper">Mode/profile changes invalidate in-flight requests. Both AI and human commands require authentication and obey per-device cooldowns.</p>
+        <p class="feedback" id="feedback" role="status" aria-live="polite">Starting secure session…</p>
+      </section>
+    </div>
+  </div>
+  <div class="logs">
+    <section class="panel log-panel" aria-labelledby="network-heading"><div class="log-header"><h2 id="network-heading">01 / Outbound IoT commands</h2><span class="eyebrow">Mock transport</span></div><div class="terminal" id="network-log" role="log" aria-label="Outbound IoT network log" aria-live="off" tabindex="0"></div></section>
+    <section class="panel log-panel" aria-labelledby="security-heading"><div class="log-header"><h2 id="security-heading">02 / Security & token exchange</h2><span class="eyebrow">Auth trace</span></div><div class="terminal" id="security-log" role="log" aria-label="Security and cryptographic exchange log" aria-live="off" tabindex="0"></div></section>
+  </div>
+  <footer><span>PawLink / software-first wearable ecosystem PoC</span><span id="session-summary">Session: initializing</span></footer>
+</main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const randomBetween = (min, max) => min + Math.random() * (max - min);
+const STATES = ["NORMAL", "HUNGRY", "THIRSTY", "BORED"];
+const COLORS = { NORMAL: "#59dfb1", HUNGRY: "#ffc66d", THIRSTY: "#70caff", BORED: "#f394cf" };
+// Display-only endpoints: this application makes no network requests.
+const ACTIONS = Object.freeze({
+  food: Object.freeze({ device: "feeder-01", endpoint: "/mock/v1/feeder/dispense", parameters: Object.freeze({ grams: 10 }), cooldown: 15000 }),
+  water: Object.freeze({ device: "water-01", endpoint: "/mock/v1/water/refill", parameters: Object.freeze({ millilitres: 50 }), cooldown: 10000 }),
+  toy: Object.freeze({ device: "toy-01", endpoint: "/mock/v1/toy/activate", parameters: Object.freeze({ durationSeconds: 5 }), cooldown: 8000 })
+});
+
+class TerminalLogger {
+  constructor(element) { this.element = element; }
+  write(message, level = "info") {
+    const bottom = this.element.scrollHeight - this.element.scrollTop - this.element.clientHeight < 45;
+    const line = document.createElement("div");
+    line.className = `log-line log-${level}`;
+    const time = document.createElement("span");
+    time.className = "log-time";
+    time.textContent = `[${new Date().toLocaleTimeString()}] `;
+    line.append(time, document.createTextNode(message));
+    this.element.append(line);
+    while (this.element.children.length > 180) this.element.firstElementChild.remove();
+    if (bottom) this.element.scrollTop = this.element.scrollHeight;
+  }
+}
+
+class PetProfile {
+  static configurations = Object.freeze({
+    dog: Object.freeze({ name: "Atlas", species: "Large Dog", highMotion: 1.8, lowMotion: .35, normalHR: 96, elevatedHR: 130, panicHR: 195, normalTemp: 38.2, hotTemp: 39, maxDemoTemp: 41 }),
+    cat: Object.freeze({ name: "Luna", species: "Cat", highMotion: 1.15, lowMotion: .25, normalHR: 142, elevatedHR: 175, panicHR: 235, normalTemp: 38.3, hotTemp: 39.1, maxDemoTemp: 41 })
+  });
+  constructor(type) {
+    if (!PetProfile.configurations[type]) throw new Error("Unsupported pet profile.");
+    this.type = type;
+    Object.assign(this, PetProfile.configurations[type]);
+    Object.freeze(this);
+  }
+  permitsAutomation(packet) { return packet.heartRate < this.panicHR && packet.temperature < this.maxDemoTemp; }
+}
+
+class TelemetryProcessor {
+  constructor(profile) { this.setProfile(profile); }
+  setProfile(profile) { this.profile = profile; this.previousMagnitude = null; }
+  fuse(packet) {
+    if (![packet.x, packet.y, packet.z, packet.heartRate, packet.temperature].every(Number.isFinite) || packet.heartRate <= 0 || packet.temperature <= 0) throw new Error("Rejected invalid telemetry.");
+    return { ...packet, magnitude: Math.sqrt(packet.x ** 2 + packet.y ** 2 + packet.z ** 2) };
+  }
+  evaluate(packet) {
+    const p = this.profile;
+    const delta = this.previousMagnitude === null ? 0 : Math.abs(packet.magnitude - this.previousMagnitude);
+    this.previousMagnitude = packet.magnitude;
+    const high = packet.magnitude >= p.highMotion;
+    const elevated = packet.heartRate >= p.elevatedHR;
+    if (packet.magnitude <= p.lowMotion && packet.temperature >= p.hotTemp) return { state: "THIRSTY", action: "water", reason: "Low movement + elevated simulated temperature → possible hydration need." };
+    if (high && elevated) return { state: "HUNGRY", action: "food", reason: "High movement + elevated heart rate → simulated pacing near the food bowl." };
+    if ((high || delta > p.highMotion * .65) && !elevated) return { state: "BORED", action: "toy", reason: "High or erratic movement + normal heart rate → simulated play-seeking behavior." };
+    return { state: "NORMAL", action: null, reason: "Motion, heart rate, and temperature remain within this profile’s demo baselines." };
+  }
+}
+
+class SecurityManager {
+  constructor(logger) {
+    this.logger = logger;
+    this.encoder = new TextEncoder();
+    this.realHmac = false;
+    this.usedNonces = new Map();
+    this.issuer = "pawlink-local-demo";
+  }
+  async initialize() {
+    try {
+      if (!globalThis.crypto?.subtle) throw new Error("Web Crypto unavailable.");
+      this.key = await crypto.subtle.generateKey({ name: "HMAC", hash: "SHA-256", length: 256 }, false, ["sign", "verify"]);
+      this.realHmac = true;
+      this.logger.write("Ephemeral non-extractable HMAC-SHA256 key generated in memory.", "crypto");
+    } catch {
+      this.logger.write("SIMULATION FALLBACK: non-cryptographic checksum only. No security guarantee.", "warn");
+    }
+    this.logger.write("Demo trust boundary: signer and verifier share this browser. No real device identity or TLS session.", "warn");
+  }
+  randomId() {
+    const bytes = new Uint8Array(12);
+    if (globalThis.crypto?.getRandomValues) crypto.getRandomValues(bytes);
+    else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+    return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("");
+  }
+  base64url(bytes) {
+    let binary = "";
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  }
+  encodeJson(value) { return this.base64url(this.encoder.encode(JSON.stringify(value))); }
+  // Deliberately labelled non-cryptographic fallback, NOT HMAC.
+  demoChecksum(bytes) {
+    let value = 2166136261;
+    for (const byte of bytes) value = Math.imul(value ^ byte, 16777619) >>> 0;
+    return new Uint8Array([value >>> 24, (value >>> 16) & 255, (value >>> 8) & 255, value & 255]);
+  }
+  header() { return { alg: this.realHmac ? "HS256" : "DEMO-CHECKSUM", typ: "PAWLINK-DEMO" }; }
+  async authorize(payload) {
+    const now = Date.now();
+    const claims = { iss: this.issuer, aud: payload.device, iat: now, exp: now + 12000, nonce: this.randomId(), command: payload };
+    const signingInput = `${this.encodeJson(this.header())}.${this.encodeJson(claims)}`;
+    const data = this.encoder.encode(signingInput);
+    const signature = this.realHmac ? new Uint8Array(await crypto.subtle.sign("HMAC", this.key, data)) : this.demoChecksum(data);
+    const token = `${signingInput}.${this.base64url(signature)}`;
+    this.logger.write(`${this.realHmac ? "HMAC-SHA256" : "MOCK CHECKSUM"} SIGN ${payload.action} · nonce=${claims.nonce.slice(0, 10)}… · TTL=12s`, "crypto");
+    this.logger.write(`Authorization: Bearer ${token.slice(0, 24)}… [redacted]`, "crypto");
+    this.logger.write(`Signature byte preview: [${Array.from(signature.slice(0, 8)).join(", ")}]`);
+    return Object.freeze({ authorization: `Bearer ${token}`, signingInput, signature, claims, serializedClaims: JSON.stringify(claims) });
+  }
+  async validate(envelope, expectedPayload) {
+    const now = Date.now();
+    for (const [nonce, expiration] of this.usedNonces) if (expiration <= now) this.usedNonces.delete(nonce);
+    const claims = envelope.claims;
+    if (claims.iss !== this.issuer || claims.aud !== expectedPayload.device || claims.iat > now || claims.exp <= now || this.usedNonces.has(claims.nonce)) throw new Error("Expired, replayed, or invalid authorization claims.");
+    if (JSON.stringify(claims.command) !== JSON.stringify(expectedPayload) || JSON.stringify(claims) !== envelope.serializedClaims) throw new Error("Payload integrity check failed.");
+    const input = `${this.encodeJson(this.header())}.${this.encodeJson(claims)}`;
+    if (envelope.signingInput !== input || envelope.authorization !== `Bearer ${input}.${this.base64url(envelope.signature)}`) throw new Error("Envelope/token binding failed.");
+    const data = this.encoder.encode(input);
+    const checksum = this.realHmac ? null : this.demoChecksum(data);
+    const valid = this.realHmac ? await crypto.subtle.verify("HMAC", this.key, envelope.signature, data) : checksum.length === envelope.signature.length && checksum.every((byte, i) => byte === envelope.signature[i]);
+    if (!valid || claims.exp <= Date.now()) throw new Error("Signature validation or expiration check failed.");
+    if (this.usedNonces.has(claims.nonce)) throw new Error("Replay detected.");
+    this.usedNonces.set(claims.nonce, claims.exp);
+    this.logger.write(`VERIFY OK · audience + payload + expiry + single-use nonce · ${expectedPayload.device}`, "success");
+  }
+}
+
+class IoTDispatcher {
+  constructor({ security, networkLog, securityLog, context, onApplied }) {
+    Object.assign(this, { security, networkLog, securityLog, context, onApplied });
+    this.generation = 0;
+    this.pending = new Map();
+    this.lastApplied = new Map();
+    this.completed = 0;
+  }
+  cancelAll(reason) {
+    this.generation++;
+    for (const request of this.pending.values()) request.controller.abort();
+    this.pending.clear();
+    this.networkLog.write(`CONTROL BARRIER · ${reason}`, "warn");
+  }
+  assertAllowed(source, generation) {
+    const current = this.context();
+    if (generation !== this.generation || (source === "AI" && current.manual) || (source === "HUMAN" && !current.manual)) throw new DOMException("Control ownership changed.", "AbortError");
+    if (source !== "AI" && source !== "HUMAN") throw new Error("Unknown command source.");
+    if (source === "AI" && (!current.packet || !current.profile.permitsAutomation(current.packet))) throw new Error("Automation inhibited: telemetry requires human review.");
+    return current;
+  }
+  wait(milliseconds, signal) {
+    return new Promise((resolve, reject) => {
+      if (signal.aborted) { reject(new DOMException("Cancelled.", "AbortError")); return; }
+      const onAbort = () => { clearTimeout(timer); reject(new DOMException("Cancelled.", "AbortError")); };
+      const timer = setTimeout(() => { signal.removeEventListener("abort", onAbort); resolve(); }, milliseconds);
+      signal.addEventListener("abort", onAbort, { once: true });
+    });
+  }
+  async dispatch(action, source) {
+    const definition = ACTIONS[action];
+    if (!definition) throw new Error("Action is not allowlisted.");
+    const generation = this.generation;
+    const current = this.assertAllowed(source, generation);
+    if (this.pending.has(action)) throw new Error("This appliance already has a pending request.");
+    const remaining = definition.cooldown - (Date.now() - (this.lastApplied.get(action) ?? 0));
+    if (remaining > 0) throw new Error(`Safety cooldown: ${action} available in ${Math.ceil(remaining / 1000)}s.`);
+    const request = { controller: new AbortController() };
+    this.pending.set(action, request);
+    const payload = Object.freeze({ requestId: this.security.randomId(), action, device: definition.device, parameters: definition.parameters, source, profile: current.profile.type, controlGeneration: generation });
+    try {
+      const envelope = await this.security.authorize(payload);
+      this.assertAllowed(source, generation);
+      if (request.controller.signal.aborted) throw new DOMException("Cancelled.", "AbortError");
+      const latency = Math.round(randomBetween(450, 1250));
+      this.networkLog.write(`MOCK POST ${definition.endpoint} · source=${source} · latency=${latency}ms`);
+      this.networkLog.write(JSON.stringify({ ...payload, authorization: "Bearer [REDACTED]" }));
+      await this.wait(latency, request.controller.signal);
+      this.assertAllowed(source, generation);
+      await this.security.validate(envelope, payload);
+      // Recheck ownership after every asynchronous boundary, before actuation.
+      this.assertAllowed(source, generation);
+      if (request.controller.signal.aborted) throw new DOMException("Cancelled.", "AbortError");
+      this.lastApplied.set(action, Date.now());
+      this.completed++;
+      this.onApplied(action);
+      this.networkLog.write(`MOCK 200 OK · ${definition.device} acknowledged · request=${payload.requestId.slice(0, 8)}`, "success");
+      return payload;
+    } catch (error) {
+      if (error.name === "AbortError") this.networkLog.write(`CANCELLED · ${definition.device} · no command applied`, "warn");
+      else this.securityLog.write(`COMMAND REJECTED · ${error.message}`, "error");
+      throw error;
+    } finally {
+      if (this.pending.get(action) === request) this.pending.delete(action);
+    }
+  }
+}
+
+class TelemetrySimulator {
+  constructor() { this.reset(); }
+  reset() { this.index = 0; }
+  next(profile) {
+    const scenario = STATES[Math.floor(this.index / 4) % STATES.length];
+    this.index++;
+    let target = profile.highMotion * .45;
+    let heartRate = profile.normalHR + randomBetween(-5, 5);
+    let temperature = profile.normalTemp + randomBetween(-.15, .15);
+    if (scenario === "HUNGRY") { target = profile.highMotion * randomBetween(1.25, 1.55); heartRate = profile.elevatedHR + randomBetween(10, 22); }
+    else if (scenario === "THIRSTY") { target = profile.lowMotion * randomBetween(.25, .65); temperature = profile.hotTemp + randomBetween(.25, .5); }
+    else if (scenario === "BORED") target = profile.highMotion * (this.index % 2 ? 1.2 : 2.15);
+    const direction = [randomBetween(-1, 1), randomBetween(-1, 1), randomBetween(-1, 1)];
+    const length = Math.hypot(...direction) || 1;
+    return { x: direction[0] / length * target, y: direction[1] / length * target, z: direction[2] / length * target, heartRate: Math.round(heartRate), temperature, timestamp: Date.now(), scenario };
+  }
+}
+
+class PetCompanionApp {
+  constructor() {
+    this.profile = new PetProfile("dog");
+    this.processor = new TelemetryProcessor(this.profile);
+    this.simulator = new TelemetrySimulator();
+    this.networkLog = new TerminalLogger($("network-log"));
+    this.securityLog = new TerminalLogger($("security-log"));
+    this.security = new SecurityManager(this.securityLog);
+    this.manual = false;
+    this.ready = false;
+    this.latestPacket = null;
+    this.lastAIState = null;
+    this.history = [];
+    this.sampleCount = this.foodCount = this.waterCount = 0;
+    this.dispatcher = new IoTDispatcher({ security: this.security, networkLog: this.networkLog, securityLog: this.securityLog, context: () => ({ manual: this.manual, profile: this.profile, packet: this.latestPacket }), onApplied: action => this.applyVirtualAction(action) });
+    this.bindEvents();
+    this.renderProfile();
+  }
+  bindEvents() {
+    $("override").addEventListener("change", event => {
+      this.manual = event.target.checked;
+      this.lastAIState = null;
+      this.dispatcher.cancelAll(this.manual ? "Human override acquired" : "AI control restored");
+      this.processor.setProfile(this.profile);
+      this.renderControl();
+      this.securityLog.write(this.manual ? "HUMAN OVERRIDE · inference paused; automatic dispatch denied." : "AI RESUMED · manual commands locked; fresh evaluation required.", "warn");
+      if (this.manual) {
+        $("state-text").textContent = "PAUSED";
+        $("state-reason").textContent = "Human control is active. Sensors remain live; AI evaluation and automated commands are paused.";
+        $("state-panel").style.setProperty("--state-color", COLORS.HUNGRY);
+      } else if (this.ready) this.tick();
+    });
+    $("profile").addEventListener("change", event => {
+      this.dispatcher.cancelAll("Pet profile changed");
+      this.profile = new PetProfile(event.target.value);
+      this.processor.setProfile(this.profile);
+      this.simulator.reset();
+      this.latestPacket = this.lastAIState = null;
+      this.history = [];
+      this.renderProfile();
+      this.networkLog.write(`PROFILE · ${this.profile.name} / ${this.profile.species} · baselines reloaded`, "warn");
+      if (this.ready) this.tick();
+    });
+    document.querySelectorAll("[data-action]").forEach(button => button.addEventListener("click", async () => {
+      if (!this.ready || !this.manual) return;
+      button.disabled = true;
+      await this.requestAction(button.dataset.action, "HUMAN");
+      this.renderButtons();
+    }));
+    window.addEventListener("resize", () => this.drawChart());
+    window.addEventListener("pagehide", () => { clearInterval(this.interval); clearTimeout(this.toyTimeout); $("toy-value").textContent = "Standby"; this.dispatcher.cancelAll("Page closed or suspended"); });
+    window.addEventListener("pageshow", event => { if (event.persisted && this.ready) this.startLoop(); });
+  }
+  async start() {
+    await this.security.initialize();
+    this.ready = true;
+    $("crypto-mode").textContent = this.security.realHmac ? "HMAC-SHA256 · native" : "MOCK ONLY · insecure fallback";
+    this.networkLog.write("Virtual habitat online. No fetch(), sockets, or physical appliances are used.", "success");
+    this.networkLog.write("Safety limits: feeder 15s · water 10s · toy 8s cooldown.");
+    this.renderControl();
+    this.startLoop();
+  }
+  startLoop() { clearInterval(this.interval); this.tick(); this.interval = setInterval(() => this.tick(), 2500); }
+  renderProfile() {
+    $("motion-baseline").textContent = `≥ ${this.profile.highMotion.toFixed(2)} m/s²`;
+    $("hr-baseline").textContent = `${this.profile.elevatedHR} / ${this.profile.panicHR} BPM`;
+    $("temp-baseline").textContent = `≥ ${this.profile.hotTemp.toFixed(1)} °C`;
+  }
+  renderButtons() { document.querySelectorAll("[data-action]").forEach(button => { button.disabled = !this.ready || !this.manual || this.dispatcher.pending.has(button.dataset.action); }); }
+  renderControl() {
+    $("control-mode").textContent = this.manual ? "HUMAN CONTROL" : "AI CONTROL";
+    $("control-mode").style.color = this.manual ? "var(--amber)" : "var(--green)";
+    $("override-description").textContent = this.manual ? "AI paused · authenticated manual control" : "AI active · manual commands locked";
+    this.renderButtons();
+    $("feedback").textContent = !this.ready ? "Starting secure session…" : this.manual ? "Manual mode ready. Commands still require token validation." : "Monitoring automatically. Enable override for manual actions.";
+  }
+  tick() {
+    try {
+      const packet = this.processor.fuse(this.simulator.next(this.profile));
+      this.latestPacket = packet;
+      this.sampleCount++;
+      for (const axis of ["x", "y", "z"]) $(`axis-${axis}`).textContent = packet[axis].toFixed(2);
+      $("magnitude").textContent = packet.magnitude.toFixed(2);
+      $("heart-rate").textContent = packet.heartRate;
+      $("temperature").textContent = packet.temperature.toFixed(1);
+      $("sample-count").textContent = `${this.sampleCount} packets`;
+      this.history.push(packet.magnitude);
+      if (this.history.length > 48) this.history.shift();
+      this.drawChart();
+      document.querySelectorAll("[data-state]").forEach(step => step.classList.toggle("active", step.dataset.state === packet.scenario));
+      // Never evaluate behavioral rules while human override owns control.
+      if (this.manual) { this.updateSummary(); return; }
+      const result = this.processor.evaluate(packet);
+      $("state-text").textContent = result.state;
+      $("state-reason").textContent = result.reason;
+      $("state-panel").style.setProperty("--state-color", COLORS[result.state]);
+      if (!this.profile.permitsAutomation(packet)) {
+        $("state-reason").textContent = "Demo safety threshold exceeded. Automation inhibited; human review required.";
+        $("feedback").textContent = "Safety interlock: automatic appliance commands are blocked.";
+        this.lastAIState = null;
+        this.updateSummary();
+        return;
+      }
+      // One automatic request per interpreted state transition, not per packet.
+      if (result.state !== this.lastAIState) {
+        this.lastAIState = result.state;
+        this.networkLog.write(`INFERENCE · ${result.state} · |a|=${packet.magnitude.toFixed(2)} · HR=${packet.heartRate}`);
+        if (result.action) void this.requestAction(result.action, "AI");
+      }
+      this.updateSummary();
+    } catch (error) {
+      this.securityLog.write(error.message, "error");
+      $("feedback").textContent = "Telemetry error: automatic dispatch halted.";
+      this.dispatcher.cancelAll("Invalid telemetry");
+    }
+  }
+  async requestAction(action, source) {
+    try {
+      await this.dispatcher.dispatch(action, source);
+      $("feedback").textContent = `${source}: ${action} acknowledged by the virtual appliance.`;
+    } catch (error) {
+      if (error.name !== "AbortError") { $("feedback").textContent = error.message; this.networkLog.write(`${source} request not applied · ${error.message}`, "warn"); }
+    } finally { this.updateSummary(); }
+  }
+  applyVirtualAction(action) {
+    if (action === "food") { this.foodCount++; $("food-value").textContent = `${this.foodCount} portion${this.foodCount === 1 ? "" : "s"}`; }
+    else if (action === "water") { this.waterCount++; $("water-value").textContent = `${this.waterCount} refill${this.waterCount === 1 ? "" : "s"}`; }
+    else {
+      clearTimeout(this.toyTimeout);
+      $("toy-value").textContent = "Playing · 5s";
+      this.toyTimeout = setTimeout(() => { $("toy-value").textContent = "Standby"; this.networkLog.write("LOCAL TIMER · virtual toy session ended.", "success"); }, 5000);
+    }
+  }
+  updateSummary() { $("session-summary").textContent = `${this.profile.name} · ${this.sampleCount} samples · ${this.dispatcher.completed} authenticated mock commands`; }
+  drawChart() {
+    const canvas = $("motion-chart"), bounds = canvas.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    const ratio = window.devicePixelRatio || 1;
+    canvas.width = Math.round(bounds.width * ratio);
+    canvas.height = Math.round(bounds.height * ratio);
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const w = bounds.width, h = bounds.height;
+    const max = Math.max(this.profile.highMotion * 2.7, ...this.history, 1);
+    const yFor = value => h - 8 - value / max * (h - 16);
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = "#23304a";
+    for (let row = 1; row <= 3; row++) { ctx.beginPath(); ctx.moveTo(0, h * row / 4); ctx.lineTo(w, h * row / 4); ctx.stroke(); }
+    ctx.setLineDash([4, 5]); ctx.strokeStyle = "#ffc66d60"; ctx.beginPath(); ctx.moveTo(0, yFor(this.profile.highMotion)); ctx.lineTo(w, yFor(this.profile.highMotion)); ctx.stroke(); ctx.setLineDash([]);
+    if (!this.history.length) return;
+    const points = this.history.map((v, i) => ({ x: 8 + i / 47 * (w - 16), y: yFor(v) }));
+    const gradient = ctx.createLinearGradient(0, 0, 0, h);
+    gradient.addColorStop(0, "#8c83ff40"); gradient.addColorStop(1, "#8c83ff00");
+    ctx.beginPath(); ctx.moveTo(points[0].x, h);
+    for (const p of points) ctx.lineTo(p.x, p.y);
+    ctx.lineTo(points[points.length - 1].x, h); ctx.closePath(); ctx.fillStyle = gradient; ctx.fill();
+    ctx.beginPath(); points.forEach((p, i) => { if (!i) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+    ctx.strokeStyle = "#a69cff"; ctx.lineWidth = 2.5; ctx.lineJoin = "round"; ctx.stroke();
+    const latest = points[points.length - 1]; ctx.beginPath(); ctx.arc(latest.x, latest.y, 3.5, 0, Math.PI * 2); ctx.fillStyle = "#ddd8ff"; ctx.fill();
+  }
+}
+const app = new PetCompanionApp();
+app.start().catch(error => { $("feedback").textContent = `Startup failed: ${error.message}`; app.securityLog.write(`STARTUP FAILURE · ${error.message}`, "error"); });
+</script>
+</body>
+</html>
